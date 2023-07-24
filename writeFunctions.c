@@ -11,8 +11,9 @@
  *
  * Return: Number of chars printed.
  */
-int handle_write_char(char ch, char buff[],int flgs, int width, int prec, int size)
-{ 
+int handle_write_char(char ch, char buff[],
+		int flgs, int width, int prec, int size)
+{
 	int index = 0;
 	char padding = ' ';
 

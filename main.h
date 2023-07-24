@@ -13,10 +13,13 @@
 #define FLAG_ZERO 4
 #define FLAG_HASH 8
 #define FLAG_SPACE 16
-#define UNUSED(y) (void)(y);
-int printString(va_list ls, char buff[],int flgs, int width, int prec, int size);
-int printPercent(va_list ls, char buff[],int flgs, int width, int prec, int size);
-int print_char(va_list ls, char buff[],int flgs, int width, int prec, int size);
+#define UNUSED(y) (void)(y)
+int printString(va_list ls, char buff[], int flgs,
+int width, int prec, int size);
+int printPercent(va_list ls, char buff[], int flgs,
+int width, int prec, int size);
+int print_char(va_list ls, char buff[],
+int flgs, int width, int prec, int size);
 int _printf(const char *format, ...);
 int _putchar(char c);
 int _strlen(char *s);
@@ -26,8 +29,10 @@ int getWidth(const char *format, int *x, va_list ls);
 int getPrecision(const char *format, int *x, va_list ls);
 int getSize(const char *format, int *x);
 int is_number(char ch);
-int handle_write_char(char ch, char buff[], int flgs, int width, int prec, int size);
-int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],int flags, int width, int precision, int size);
+int handle_write_char(char ch, char buff[],
+int flgs, int width, int prec, int size);
+int handlePrint(const char *fmt, int *ind, va_list list,
+char buffer[], int flags, int width, int precision, int size);
 /**
  * struct fmt - Struct op
  *
@@ -48,7 +53,8 @@ struct fmt
  * @fm_t: The function associated.
  */
 typedef struct fmt fmt_t;
-int print_handler(const char *fmt, int *ind, va_list list, char buffer[],int flags, int width, int precision, int size);
+int print_handler(const char *fmt, int *ind, va_list list, char buffer[],
+int flags, int width, int precision, int size);
 
 
 #endif /*MAIN.H*/

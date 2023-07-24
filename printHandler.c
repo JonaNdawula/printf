@@ -11,11 +11,12 @@
  * @size: Size specifier
  * Return: 1 or 2;
  */
-int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],int flags, int width, int precision, int size)
+int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
+		int flags, int width, int precision, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
 	fmt_t fmt_types[] = {
-		{'c', print_char}, {'s', printString}, {'%',printPercent},
+		{'c', print_char}, {'s', printString}, {'%', printPercent},
 		 {'\0', NULL}
 	};
 	for (i = 0; fmt_types[i].fmt != '\0'; i++)
