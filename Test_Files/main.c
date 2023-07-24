@@ -21,6 +21,10 @@ int main(void)
 	printf("%s\n", str);
 	_printf("%%\n");
 	printf("%%\n");
-
+	_pritnf("%s",NULL);
+	printf("%s", NULL);
+	 _printf(" Character: %c, String: %s, Percentage: %%", 'X', "Test");
+	 printf("\n");
+	 printf (" Character: %c, String: %s, Percentage: %%", 'X', "Test");
 	return (0);
 }
