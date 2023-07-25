@@ -46,10 +46,13 @@ int appendHex(char ascii, char buff[], int index);
 
 int printable(char ch);
 
-int pointerWriter (char buff[], int ind, int length,
+int rot13_printer(va_list types, char buff[],
+int flags, int wide, int preci, int siz);
+
+int pointerWriter(char buff[], int ind, int length,
 		int width, int flgs, char padding, char extra_char, int padding_start);
 
-int pointerPrinter (va_list ls, char buffer[],
+int pointerPrinter(va_list ls, char buffer[],
 		int flgs, int width, int prec, int siz);
 
 

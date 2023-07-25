@@ -37,8 +37,14 @@ int main(void)
 	_printf("%S\n", "Best\nSchool");
 	_printf("Address:[%p]\n", addr);
 	printf("Address:[%p]\n", addr);
+<<<<<<< HEAD
       	printf("Testing_printf with custom conversion specifier 'r':\n");
     	_printf("%r\n"); 	
+=======
+	printf("Testing _printf with custom conversion specifier 'R':\n");
+	_printf("ROT13'ed String: %R\n", str);
+	    
+>>>>>>> e1782ca411fb7d8d18a6267c2f4be3d591ee2aa1
 	return (0);
 
 }
