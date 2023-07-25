@@ -25,15 +25,26 @@ int binaryPrint(va_list ls, char buff[],
 int printInt(va_list ls, char buff[],
 		int flgs, int width, int prec, int size);
 
+int write_unsigned(int is_negative, int ind,
+char buff[], int flags, int wide, int preci, int siz);
+
+int unsigned_numb(va_list typs, char buff[],
+int flags, int wide, int preci, int siz);
+
 int printUnsignedInt(va_list ls, char buff[],
-		int flgs, int width, int prec, int size);
+int flgs, int width, int prec, int size);
 int write_numb(int is_positive, int ind, char buffer[],
-		int flags, int width, int precision, int size);
+int flags, int width, int precision, int size);
 
 int write_num(int ind, char buff[], int flgs,
 		int width, int prec, int length, int padding, char extra_char);
 
 long int convert_size_number(long int n, int size);
+
+int octalPrinter(va_list types, char buff[],
+int flags, int wide, int preci, int siz);
+
+long int convert_size_unsigned(unsigned long int num, int size);
 
 int print_char(va_list ls, char buff[],
 		int flgs, int width, int prec, int size);
@@ -52,6 +63,16 @@ int handle_write_char(char ch, char buff[],
 
 int handlePrint(const char *fmt, int *ind, va_list list,
 		char buffer[], int flags, int width, int precision, int size);
+
+int hex_printer(va_list types, char buff[],
+int flags, int wide, int preci, int siz);
+
+int hex_uppercase(va_list types, char buff[],
+int flags, int wide, int preci, int siz);
+
+
+int print_hexa(va_list types, char map_to[],
+char buff[], int flags, char flag_char, int wide, int preci, int siz);
 
 /**
  * struct fmt - Struct op

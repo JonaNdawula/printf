@@ -132,3 +132,59 @@ int write_num(int ind, char buff[], int flgs,
 	return (write(1, &buff[ind], length));
 }
 
+
+/**
+ * write_unsigned - Writes an unsigned number
+ * @is_negative: Number indicating if the num is negative
+ * @ind: Index at which the number starts in the buffer
+ * @buff: Array of chars
+ * @flags: Flags specifiers
+ * @wide: Width specifier
+ * @preci: Precision specifier
+ * @siz: Size specifier
+ *
+ * Return: Number of written chars.
+ */
+int write_unsigned(int is_negative, int ind,
+char buff[], int flags, int wide, int preci, int siz)
+{
+	int length = BUFFER_SIZE - ind - 1, i = 0;
+	char padding = ' ';
+
+	UNUSED(is_negative);
+	UNUSED(siz);
+
+	if (preci == 0 && ind == BUFFER_SIZE - 2 && buff[ind] == '0')
+		return (0);
+
+	if (preci > 0 && preci < length)
+		padding = ' ';
+
+	while (preci > length)
+	{
+		buff[--ind] = '0';
+		length++;
+	}
+
+	if ((flags & FLAG_ZERO) && !(flags & FLAG_MINUS))
+		padding = '0';
+
+	if (wide > length)
+	{
+		for (i = 0; i < wide - length; i++)
+			buff[i] = padding;
+
+		buff[i] = '\0';
+
+		if (flags & FLAG_MINUS)
+		{
+			return (write(1, &buff[ind], length) + write(1, &buff[0], i));
+		}
+		else
+		{
+			return (write(1, &buff[0], i) + write(1, &buff[ind], length));
+		}
+	}
+
+	return (write(1, &buff[ind], length));
+}
