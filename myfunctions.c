@@ -141,6 +141,51 @@ int printInt(va_list ls, char buff[], int flgs, int width, int prec, int size)
 	return (write_numb(negativeNumb, index, buff, flgs, width, prec, size));
 
 }
+/**
+ * binaryPrint - Prints an unsigned number
+ * @ls: List of arguments
+ * @buff: Buffer array to handle print
+ * @flgs:  Calculates active flags
+ * @width: get width.
+ * @prec: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of char printed.
+ */
+int binaryPrint(va_list ls, char buff[],
+		int flgs, int width, int prec, int size)
+{
+	unsigned int x, y, index, sum;
+	unsigned int arr[32];
+	int counter;
 
+	UNUSED(buff);
+	UNUSED(flgs);
+	UNUSED(width);
+	UNUSED(prec);
+	UNUSED(size);
+
+	x = va_arg(ls, unsigned int);
+	y = 2147483648;
+	arr[0] = x / y;
+	index = 1;
+	while (index < 32)
+	{
+		y /= 2;
+		arr[index] = (x / y) % 2;
+		index++;
+	}
+	for (index = 0, sum = 0, counter = 0; index < 32; index++)
+	{
+		sum += arr[index];
+		if (sum || index == 31)
+		{
+			char res = '0' + arr[index];
+
+			write(1, &res, 1);
+			counter++;
+		}
+	}
+	return (counter);
+}
 int printUnsignedInt(va_list ls, char buff[], int flgs,
-int width, int prec, int size);
+		int width, int prec, int size);
