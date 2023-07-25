@@ -135,3 +135,55 @@ int print_hexa(va_list types, char map_to[], char buff[],
 	return (write_unsigned(0, i, buff, flags, wide, preci, siz));
 }
 
+
+
+/**
+ * rot13_printer - Print a string in rot13.
+ * @types: Lista of arguments
+ * @buff: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @wide: get width
+ * @preci: Precision specification
+ * @siz: Size specifier
+ * Return: Numbers of chars printed
+ */
+int rot13_printer(va_list types, char buff[],
+		int flags, int wide, int preci, int siz)
+{
+	char x;
+	char *str;
+	unsigned int i, j;
+	int count = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	str = va_arg(types, char *);
+	UNUSED(buff);
+	UNUSED(flags);
+	UNUSED(wide);
+	UNUSED(preci);
+	UNUSED(siz);
+
+	if (str == NULL)
+		str = "(AHYY)";
+	for (i = 0; str[i]; i++)
+	{
+		for (j = 0; in[j]; j++)
+		{
+			if (in[j] == str[i])
+			{
+				x = out[j];
+				write(1, &x, 1);
+				count++;
+				break;
+			}
+		}
+		if (!in[j])
+		{
+			x = str[i];
+			write(1, &x, 1);
+			count++;
+		}
+	}
+	return (count);
+}
