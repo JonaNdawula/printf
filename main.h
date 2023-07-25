@@ -39,7 +39,7 @@ int write_numb(int is_positive, int ind, char buffer[],
 int nonPrint(va_list ls, char buff[],
 		int flgs, int width, int prec, int siz);
 
-int reversePr (va_list ls, char buff[],
+int reversePr(va_list ls, char buff[],
 	int flgs, int width, int prec, int siz);
 
 int appendHex(char ascii, char buff[], int index);

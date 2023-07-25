@@ -19,13 +19,9 @@ int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
 		{'c', print_char}, {'s', printString}, {'%', printPercent},
 		{'d',  printInt}, {'i',  printInt}, {'b', binaryPrint}, {'u', unsigned_numb},
 		{'o', octalPrinter}, {'x', hex_printer}, {'R', rot13_printer},
-		{'X', hex_uppercase},  {'S', nonPrint},
-<<<<<<< HEAD
-		{'p',pointerPrinter}, {'r', reversePr},
-=======
-		{'p', pointerPrinter},
->>>>>>> e1782ca411fb7d8d18a6267c2f4be3d591ee2aa1
-		{'\0', NULL}
+		 {'X', hex_uppercase},  {'S', nonPrint},
+		{'p', pointerPrinter}, {'r', reversePr},
+		 {'p', pointerPrinter}, {'\0', NULL}
 	};
 	for (i = 0; fmt_types[i].fmt != '\0'; i++)
 		if (fmt[*ind] == fmt_types[i].fmt)
