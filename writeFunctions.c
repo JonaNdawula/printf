@@ -146,7 +146,7 @@ int write_num(int ind, char buff[], int flgs,
  * Return: Number of written chars.
  */
 int write_unsigned(int is_negative, int ind,
-char buff[], int flags, int wide, int preci, int siz)
+		char buff[], int flags, int wide, int preci, int siz)
 {
 	int length = BUFFER_SIZE - ind - 1, i = 0;
 	char padding = ' ';
@@ -188,3 +188,60 @@ char buff[], int flags, int wide, int preci, int siz)
 
 	return (write(1, &buff[ind], length));
 }
+
+/**
+ * pointerWriter - Write a memory address
+ * @buff: Arrays of chars
+ * @ind: Index at which the number starts in the buffer
+ * @length: Length of number
+ * @width: Width specifier
+ * @flgs: Flags specifier
+ * @padding: Char representing the padding
+ * @extra_char: Char representing extra char
+ * @padding_start: Index at which padding should start
+ *
+ * Return: Number of written chars.
+ */
+int pointerWriter(char buff[], int ind, int length,
+		int width, int flgs, char padding, char extra_char, int padding_start)
+{
+	int index;
+
+	if (width > length)
+	{
+		for (index = 3; index < width - length + 3; index++)
+			buff[index] = padding;
+		buff[index] = '\0';
+		if (flgs & FLAG_MINUS && padding == ' ')
+		{
+			buff[--ind] = 'x';
+			buff[--ind] = '0';
+			if (extra_char)
+				buff[--ind] = extra_char;
+			return (write(1, &buff[ind], length) + write(1, &buff[3], index - 3));
+		}
+		else if (!(flgs & FLAG_MINUS) && padding == ' ')
+		{
+			buff[--ind] = 'x';
+			buff[--ind] = '0';
+			if (extra_char)
+				buff[--ind] = extra_char;
+			return (write(1, &buff[3], index - 3) + write(1, &buff[ind], length));
+		}
+		else if (!(flgs & FLAG_MINUS) && padding == '0')
+		{
+			if (extra_char)
+				buff[--padding_start] = extra_char;
+			buff[1] = '0';
+			buff[2] = 'x';
+			return (write(1, &buff[padding_start], index - padding_start) +
+					write(1, &buff[ind], length - (1 - padding_start) - 2));
+		}
+	}
+	buff[--ind] = 'x';
+	buff[--ind] = '0';
+	if (extra_char)
+		buff[--ind] = extra_char;
+	return (write(1, &buff[ind], BUFFER_SIZE - ind - 1));
+}
+

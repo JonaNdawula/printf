@@ -20,6 +20,7 @@ int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
 		{'d',  printInt}, {'i',  printInt}, {'b', binaryPrint}, {'u', unsigned_numb},
 		{'o', octalPrinter}, {'x', hex_printer},
 		{'X', hex_uppercase},  {'S', nonPrint},
+		{'p',pointerPrinter},
 		{'\0', NULL}
 	};
 	for (i = 0; fmt_types[i].fmt != '\0'; i++)
