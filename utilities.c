@@ -13,4 +13,21 @@ int is_number(char ch)
 	return (0);
 }
 
+/**
+ * convert_size_number - Casts a number to the specified size
+ * @n: Number to be casted.
+ * @size: Number indicating the type to be casted.
+ *
+ * Return: Casted value of n
+ */
+long int convert_size_number(long int n, int size)
+{
+	if (size == SIZE_LONG)
+		return (n);
+	else if (size == SIZE_SHORT)
+		return ((short)n);
+
+	return ((int)n);
+}
+
 

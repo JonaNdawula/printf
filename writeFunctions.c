@@ -43,3 +43,92 @@ int handle_write_char(char ch, char buff[],
 	return (write(1, &buff[0], 1));
 }
 
+/**
+ * write_number - Prints a string
+ * @negativeNumb: List of arguments
+ * @index: char types.
+ * @buff: Buffer array to handle print
+ * @flgs:  Calculates the  active flags
+ * @width: gets the width.
+ * @prec: precision specifier
+ * @size: Size specifier
+ *
+ * Return: Number of chars printed.
+ */
+int write_numb(int negativeNumb, int index, char buff[],
+		int flgs, int width, int prec, int size)
+{
+	int length = BUFFER_SIZE - index - 1;
+	char padding = ' ', extra_char = 0;
+
+	UNUSED(size);
+
+	if ((flgs & FLAG_ZERO) && !(flgs & FLAG_MINUS))
+		padding = '0';
+	if (negativeNumb)
+		extra_char = '-';
+	else if (flgs & FLAG_PLUS)
+		extra_char = '+';
+	else if (flgs & FLAG_SPACE)
+		extra_char = ' ';
+
+	return (write_num(index, buff, flgs, width, prec,
+				length, padding, extra_char));
+}
+
+/**
+ * write_num - Write a number using a bufffer
+ * @ind: Index at which the number starts on the buffer
+ * @buff: Buffer
+ * @flgs: Flags
+ * @width: width
+ * @prec: Precision specifier
+ * @length: Number length
+ * @padding: Pading char
+ * @extra_char: Extra char
+ *
+ * Return: Number of printed chars.
+ */
+int write_num(int ind, char buff[], int flgs,
+		int width, int prec, int length, int padding, char extra_char)
+{
+	int index, padding_start = 1;
+
+	if (prec == 0 && ind == BUFFER_SIZE - 2 && buff[ind] == '0' && width == 0)
+		return (0);
+	if (prec > 0 && prec < length)
+		padding = ' ';
+	while (prec > length)
+		buff[--ind] = '0', length++;
+	if (extra_char != 0)
+		length++;
+	if (width > length)
+	{
+		for (index = 1; index < width - length + 1; index++)
+			buff[index] = padding;
+		buff[index] = '\0';
+		if (flgs & FLAG_MINUS && padding == ' ')
+		{
+			if (extra_char)
+				buff[--index] = extra_char;
+			return (write(1, &buff[index], length) + write(1, &buff[1], index - 1));
+		}
+		else if (!(flgs & FLAG_MINUS) && padding == ' ')
+		{
+			if (extra_char)
+				buff[--index] = extra_char;
+			return (write(1, &buff[1], index - 1) + write(1, &buff[ind], length));
+		}
+		else if (!(flgs & FLAG_MINUS) && padding == '0')
+		{
+			if (extra_char)
+				buff[--padding_start] = extra_char;
+			return (write(1, &buff[padding_start], index - padding_start) +
+					write(1, &buff[ind], length - (1 - padding_start)));
+		}
+	}
+	if (extra_char)
+		buff[--ind] = extra_char;
+	return (write(1, &buff[ind], length));
+}
+

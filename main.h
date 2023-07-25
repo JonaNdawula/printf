@@ -18,6 +18,20 @@ int printString(va_list ls, char buff[], int flgs,
 int width, int prec, int size);
 int printPercent(va_list ls, char buff[], int flgs,
 int width, int prec, int size);
+
+int printInt(va_list ls, char buff[],
+int flgs, int width, int prec, int size);
+
+int printUnsignedInt(va_list ls, char buff[],
+int flgs, int width, int prec, int size);
+int write_numb(int is_positive, int ind, char buffer[],
+int flags, int width, int precision, int size);
+
+int write_num(int ind, char buff[], int flgs,
+int width, int prec, int length, int padding, char extra_char);
+
+long int convert_size_number(long int n, int size);
+
 int print_char(va_list ls, char buff[],
 int flgs, int width, int prec, int size);
 int _printf(const char *format, ...);
@@ -29,10 +43,13 @@ int getWidth(const char *format, int *x, va_list ls);
 int getPrecision(const char *format, int *x, va_list ls);
 int getSize(const char *format, int *x);
 int is_number(char ch);
+
 int handle_write_char(char ch, char buff[],
 int flgs, int width, int prec, int size);
+
 int handlePrint(const char *fmt, int *ind, va_list list,
 char buffer[], int flags, int width, int precision, int size);
+
 /**
  * struct fmt - Struct op
  *

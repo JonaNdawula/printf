@@ -12,7 +12,7 @@
  *
  */
 int printString(va_list ls, char buff[],
-int flgs, int width, int prec, int size)
+		int flgs, int width, int prec, int size)
 {
 	int len = 0, index;
 	char *st = va_arg(ls, char *);
@@ -68,7 +68,7 @@ int flgs, int width, int prec, int size)
  * Return: Number of chars printed
  */
 int printPercent(va_list ls, char buff[], int flgs,
-int width, int prec, int size)
+		int width, int prec, int size)
 {
 	UNUSED(ls);
 	UNUSED(buff);
@@ -90,12 +90,57 @@ int width, int prec, int size)
  * Return: Number of chars printed
  */
 int print_char(va_list ls, char buff[], int flgs,
-int width, int prec, int size)
+		int width, int prec, int size)
 {
 	char ch = va_arg(ls, int);
 
 	return (handle_write_char(ch, buff, flgs, width, prec, size));
 }
 
+/**
+ * printInt - Prints an int
+ * @ls: List of arguments
+ * @buff: Buffer array for printing
+ * @flgs:  Calculates active flags
+ * @width: get width.
+ * @prec: Precision
+ * @size: Size specifier
+ * Return: output
+ */
 
+int printInt(va_list ls, char buff[], int flgs, int width, int prec, int size)
+{
 
+	int index  = BUFFER_SIZE - 2;
+	int negativeNumb  = 0;
+	long int n = va_arg(ls, long int);
+	unsigned long int numb;
+
+	n = convert_size_number(n, size);
+
+	if (n == 0)
+		buff[index--] = '0';
+
+	buff[BUFFER_SIZE - 1] = '\0';
+	numb = (unsigned long int)n;
+
+	if (n < 0)
+	{
+		numb = (unsigned long int)((-1) * n);
+		negativeNumb = 1;
+	}
+
+	while (numb > 0)
+	{
+		buff[index--] = (numb % 10) + '0';
+		numb /= 10;
+	}
+
+	index++;
+
+	return (write_numb(negativeNumb, index, buff, flgs, width, prec, size));
+
+}
+
+int printUnsignedInt(va_list ls, char buff[], int flgs,
+int width, int prec, int size);
