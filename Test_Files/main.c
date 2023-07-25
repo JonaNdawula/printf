@@ -37,6 +37,8 @@ int main(void)
 	_printf("%S\n", "Best\nSchool");
 	_printf("Address:[%p]\n", addr);
 	printf("Address:[%p]\n", addr);
+      	printf("Testing_printf with custom conversion specifier 'r':\n");
+    	_printf("%r\n"); 	
 	return (0);
 
 }

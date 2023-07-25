@@ -134,4 +134,46 @@ int print_hexa(va_list types, char map_to[], char buff[],
 
 	return (write_unsigned(0, i, buff, flags, wide, preci, siz));
 }
+/**
+ * reversePr - Prints reverse string.
+ * @ls: List of arguments
+ * @buff: Buffer array to handle print
+ * @flgs:  Calculates active flags
+ * @width: get width
+ * @prec: Precision specification
+ * @siz: Size specifier
+ * Return: Numbers of chars printed
+ */
+
+int reversePr(va_list ls, char buff[],
+		int flgs, int width, int prec, int siz)
+{
+	char *st;
+	int index, count = 0;
+
+	UNUSED(buff);
+	UNUSED(flgs);
+	UNUSED(width);
+	UNUSED(siz);
+
+	st = va_arg(ls, char *);
+
+	if (st == NULL)
+	{
+		UNUSED(prec);
+
+		st = ")Null(";
+	}
+	for (index = 0; st[index]; index++)
+		;
+
+	for (index = index - 1; index >= 0; index--)
+	{
+		char x = st[index];
+
+		write(1, &x, 1);
+		count++;
+	}
+	return (count);
+}
 
