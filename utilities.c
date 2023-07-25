@@ -58,6 +58,7 @@ long int convert_size_unsigned(unsigned long int num, int siz)
 int hex_append(char ascii, char buff[], int i)
 {
 	char map_to[] = "0123456789ABCDEF";
+
 	if (ascii < 0)
 		ascii *= -1;
 
@@ -68,5 +69,23 @@ int hex_append(char ascii, char buff[], int i)
 	buff[i] = map_to[ascii % 16];
 
 	return (3);
+}
+
+/**
+ * printable - Evaluates if a char is printable
+ * @ch: Char to be evaluated.
+ *
+ * Return: 1 if c is printable, 0 otherwise
+ */
+
+
+
+
+int printable(char ch)
+{
+	if (ch >= 32 && ch < 127)
+		return (1);
+
+	return (0);
 }
 

@@ -345,3 +345,43 @@ int print_hexa(va_list types, char map_to[], char buff[],
 
 	return (write_unsigned(0, i, buff, flags, wide, preci, siz));
 }
+
+
+/**
+ * nonPrint - Prints ascii codes in hexa of non printable chars
+ * @ls: Lists of arguments
+ * @buff: Buffer array to handle print
+ * @flgs:  Calculates active flags
+ * @width: get width
+ * @prec: Precision specification
+ * @siz: Size specifier
+ * Return: number of chars printed
+ */
+int nonPrint(va_list ls, char buff[],
+		int flgs, int width, int prec, int siz)
+{
+	int index = 0, x = 0;
+	char *st = va_arg(ls, char *);
+
+	UNUSED(flgs);
+	UNUSED(width);
+	UNUSED(prec);
+	UNUSED(siz);
+
+	if (st == NULL)
+		return (write(1, "(null)", 6));
+
+	while (st[index] != '\0')
+	{
+		if (printable(st[index]))
+			buff[index + x] = st[index];
+		else
+			x += appendHex(st[index], buff, index + x);
+
+		index++;
+	}
+
+	buff[index + x] = '\0';
+
+	return (write(1, buff, index + x));
+}

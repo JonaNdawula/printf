@@ -36,6 +36,13 @@ int flgs, int width, int prec, int size);
 int write_numb(int is_positive, int ind, char buffer[],
 int flags, int width, int precision, int size);
 
+int nonPrint(va_list ls, char buff[],
+	int flgs, int width, int prec, int siz);
+
+int appendHex(char ascii, char buff[], int index);
+
+int printable(char ch);
+
 int write_num(int ind, char buff[], int flgs,
 		int width, int prec, int length, int padding, char extra_char);
 
