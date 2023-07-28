@@ -10,30 +10,26 @@
  */
 int getWidth(const char *format, int *x, va_list ls)
 {
-	int curr_index;
 	int width = 0;
 
-	for (curr_index = *x + 1; format[curr_index] != '\0'; curr_index++)
+	(void)*x;
+
+	if (*format == '*')
 	{
-		if (is_number(format[curr_index]))
-		{
-		        
-			width = width * 10 +  (format[curr_index] - '0');
-		}
-		else if (format[curr_index] == '*')
-		{
-			curr_index++;
-			width = va_arg(ls, int);
-			break;
-		}
-		else
-		{
-			break;
-		}
+
+		width = va_arg(ls, int);
+		format++;
+	}
+	else
+	{
+
+		while (is_number(*format)
+			width = width * 10 +  (*format - '0');
 	}
 
-	*x = curr_index - 1;
 
-	return (width);
-}
+
+
+		return (width);
+	}
 
