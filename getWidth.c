@@ -17,8 +17,8 @@ int getWidth(const char *format, int *x, va_list ls)
 	{
 		if (is_number(format[curr_index]))
 		{
-			width *= 10;
-			width += format[curr_index] - '0';
+		        
+			width = width * 10 +  (format[curr_index] - '0');
 		}
 		else if (format[curr_index] == '*')
 		{
